@@ -2,6 +2,8 @@ open import Level using (Level)
 
 module Equality where
 
+infix 3 _≡_
+
 data _≡_ {ℓ : Level} {A : Set ℓ} (x : A) : A → Set ℓ where
   refl : x ≡ x
 

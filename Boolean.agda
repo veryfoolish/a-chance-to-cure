@@ -22,3 +22,21 @@ theorem′  = ind₂ C (inl refl) (inr refl)
 
 Not : Boolean → Boolean
 Not = rec₂ ⊤ ⊥
+
+_∧_ : Boolean → Boolean → Boolean
+⊤ ∧ ⊤ = ⊤
+_ ∧ _ = ⊥
+
+_⊕_ : Boolean → Boolean → Boolean
+⊤ ⊕ ⊤ = ⊥
+⊤ ⊕ ⊥ = ⊤
+⊥ ⊕ ⊤ = ⊤
+⊥ ⊕ ⊥ = ⊥ 
+
+_⊹_ : Boolean → Boolean → Boolean
+⊤ ⊹ _ = ⊤
+_ ⊹ ⊤ = ⊤
+_ ⊹ _ = ⊥
+
+IsTrue : Boolean → Boolean
+IsTrue x = x

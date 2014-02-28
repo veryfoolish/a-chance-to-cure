@@ -23,23 +23,23 @@ module Length {ℓ : Level} {A : Set ℓ} where
 
 open Length public
 
-module Null where
-  Lemma₃ : ∀ {ℓ} → {A : Set ℓ} → (a b : List A) → (e : A) → (a ≡ b)  → (e ∷ a) ≡ (e ∷ b)
+module Null {ℓ : Level} {A : Set ℓ} where
+
+  Lemma₃ : (a b : List A) → (e : A) → (a ≡ b)  → (e ∷ a) ≡ (e ∷ b)
   Lemma₃ a .a e refl = refl
 
-  LemmaA : ∀ {ℓ} → {A : Set ℓ} → (a b c : List A) → (a ≡ b) → (c ++ a) ≡ (c ++ b)
+  LemmaA : (a b c : List A) → (a ≡ b) → (c ++ a) ≡ (c ++ b)
   LemmaA a .a c refl = refl
 
-  --- this proof (Lemma₄) is surprisingly difficult. it doesn't look difficult, but it wasn't
-  --- easy to get right.
-  Lemma₄ : ∀ {ℓ} → {A : Set ℓ} → (a : List A) → a ++ [] ≡ a
+  --- surprisingly difficult to get right.
+  Lemma₄ : (a : List A) → a ++ [] ≡ a
   Lemma₄ [] = refl
-  Lemma₄ (x ∷ xs) = Lemma₃ (xs ++ []) xs x (Lemma₄ xs)
+  Lemma₄ (head ∷ tail) = Lemma₃ (tail ++ []) tail head (Lemma₄ tail)
 
-  Lemma₅ : ∀ {ℓ} → {A : Set ℓ} → (a : List A) → a ≡ [] ++ a
-  Lemma₅ x = refl
+  Lemma₅ : {a : List A} → a ≡ [] ++ a
+  Lemma₅ = refl
 
-  Lemma₆ : ∀ {ℓ} → {A : Set ℓ} → (a : List A) → (a ++ [] ≡ [] ++ a)
-  Lemma₆ a = ≡-trans  (Lemma₄ a) (Lemma₅ a)
+  Lemma₆ : (a : List A) → (a ++ [] ≡ [] ++ a)
+  Lemma₆ a = ≡-trans  (Lemma₄ a) Lemma₅
 
 open Null public

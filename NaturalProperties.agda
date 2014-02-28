@@ -2,8 +2,7 @@ module NaturalProperties where
 
 open import Natural
 open import Equality
-
--- The algebraic structure (ℕ, +, *, 0, 1) forms a commutative semi-ring.
+open import EquationalReasoning
 
 
 +0-left-id : {a : ℕ} → 0 + a ≡ a
@@ -19,3 +18,18 @@ open import Equality
 +comm-zero-id₂ : {a : ℕ} → 0 + a ≡ a + 0
 +comm-zero-id₂ = ≡-trans-flip +0-left-id +0-right-id
 
+m+1+n≡1+m+n : (m n : ℕ) → m + S n ≡ S (m + n)
+m+1+n≡1+m+n 0 n = refl
+m+1+n≡1+m+n (S m) n = ≡-fun-ap S (m+1+n≡1+m+n m n)
+
++-comm : (a b : ℕ) → a + b ≡ b + a
++-comm 0     n = +comm-zero-id₂
++-comm (S m) n = 
+            S m + n
+          ≡⟨ refl ⟩
+            S (m + n)
+          ≡⟨ ≡-fun-ap S (+-comm m n) ⟩
+           S (n + m)
+          ≡⟨ ≡-symmetric (m+1+n≡1+m+n n m) ⟩
+           n + S m
+          ∎

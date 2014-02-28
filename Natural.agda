@@ -1,8 +1,9 @@
 module Natural where
 
-open import Level using (Level) renaming (zero to ∘)
+open import Equality
+open import Level using (Level) renaming (suc to lsuc; zero to lzero)
 
-data ℕ : (Set ∘) where
+data ℕ : Set where
   O : ℕ
   S : ℕ → ℕ
 
@@ -10,36 +11,63 @@ data ℕ : (Set ∘) where
 {-# BUILTIN SUC S #-}
 {-# BUILTIN ZERO O #-}
 
+infixl 7 _*_ _max_
+infixl 6 _+_ _min_ _∸_
+
+-- addition
 _+_ : ℕ → ℕ → ℕ
-0 + m = m
-(S n) + m = S (n + m)
+0   + m = m
+S n + m = S (n + m)
 
+{-# BUILTIN NATPLUS _+_ #-}
 
-open import Equality
+-- saturating subtraction (clamped to 0)
+_∸_ : ℕ → ℕ → ℕ
+n   ∸ 0   = n
+0   ∸ S n = 0
+S m ∸ S n = m ∸ n
 
-sym : {m n : ℕ} → m ≡ n → n ≡ m
-sym refl = refl
+{-# BUILTIN NATMINUS _∸_ #-}
 
-S-≡ : {m n : ℕ} → m ≡ n → 1 + m ≡ 1 + n
-S-≡ refl = refl
+-- multiplication
+_*_ : ℕ → ℕ → ℕ
+0   * m = 0
+S n * m = n * m + m
 
-+assoc : (m n p : ℕ) → (m + n) + p ≡ m + (n + p)
-+assoc 0 n p = refl
-+assoc (S m) n p = S-≡ (+assoc m n p)
+{-# BUILTIN NATTIMES _*_ #-}
 
-x+0≡x : (m : ℕ) → m + 0 ≡ m
-x+0≡x 0 = refl
-x+0≡x (S m) = S-≡ (x+0≡x m)
+-- exponentiation
+exp : ℕ → ℕ → ℕ
+exp n 0     = 1
+exp n (S m) = n * exp n m
 
-m+1+n≡1+m+n : (m n : ℕ) → m + (1 + n) ≡ 1 + (m + n)
-m+1+n≡1+m+n O     n = refl
-m+1+n≡1+m+n (S m) n = S-≡ (m+1+n≡1+m+n m n)
+-- factorial
+_! : ℕ → ℕ
+0   ! = 1
+S n ! = S n * n !
 
+-- maximum
+_max_ : ℕ → ℕ → ℕ
+0   max n   = n
+S m max 0   = S m
+S m max S n = S (m max n)
 
+_min_ : ℕ → ℕ → ℕ
+0   min n   = 0
+S m min 0   = 0
+S m min S n = S (m min n)
 
+infix 4 _≤_ _<_
 
+{- inequalities (note) : Eventually I'll probably have a 'Rel' abstract type like Agda's
+standard library. But for now I'm trying to keep things concrete. -}
 
+-- less than or equal to
+data _≤_ : ℕ → ℕ → Set (lsuc lzero)  where
+  0≤n : ∀ {n}                 → 0 ≤ n
+  +1≤ : ∀ {m n} (m≤n : m ≤ n) → (S m) ≤ (S n)
 
-
-
+-- less than
+_<_ : ℕ → ℕ → Set (lsuc lzero)
+m < n = S m ≤ n
 

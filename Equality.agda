@@ -14,5 +14,7 @@ data _≡_ {ℓ : Level} {A : Set ℓ} (x : A) : A → Set ℓ where
 ≡-trans : {ℓ : Level} {A : Set ℓ} {a b c : A} → (a ≡ b) → (b ≡ c) → (a ≡ c)
 ≡-trans refl refl = refl
 
+≡-trans-flip : {ℓ : Level} {A : Set ℓ} {a b c : A} → (a ≡ b) → (c ≡ b) → (a ≡ c)
+≡-trans-flip a p = ≡-trans a (≡-symmetric p)
 
 

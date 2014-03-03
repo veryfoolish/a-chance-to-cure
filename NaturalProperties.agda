@@ -25,11 +25,12 @@ m+1+n≡1+m+n (S m) n = ≡-fun-ap S (m+1+n≡1+m+n m n)
 +-comm : (a b : ℕ) → a + b ≡ b + a
 +-comm 0     n = +comm-zero-id₂
 +-comm (S m) n = 
-            S m + n
-          ≡⟨ refl ⟩
-            S (m + n)
-          ≡⟨ ≡-fun-ap S (+-comm m n) ⟩
-           S (n + m)
-          ≡⟨ ≡-symmetric (m+1+n≡1+m+n n m) ⟩
-           n + S m
-          ∎
+            S m + n ≡⟨ refl ⟩
+            S m + n ≡⟨ ≡-fun-ap S (+-comm m n) ⟩
+            S n + m ≡⟨ ≡-symmetric (m+1+n≡1+m+n n m) ⟩
+            n + S m
+            ∎
+
++-assoc : (a b c : ℕ) → (a + b) + c ≡ a + (b + c)
++-assoc O b c = refl
++-assoc (S a) b c = ≡-fun-ap S (+-assoc a b c)

@@ -70,3 +70,8 @@ data _≤_ : ℕ → ℕ → Set (lsuc lzero)  where
 -- less than
 _<_ : ℕ → ℕ → Set (lsuc lzero)
 m < n = S m ≤ n
+
+-- greater than
+
+_>_ : ℕ → ℕ → Set (lsuc lzero)
+m > n = n < m

@@ -30,3 +30,7 @@ foldl c n (x ∷ xs) = foldl c (c n x) xs
 
 reverse : {ℓ : Level} {A : Set ℓ} → List A → List A
 reverse = foldl (λ rev x → x ∷ rev) []
+
+
+testlist : List ℕ
+testlist = 8 ∷ 7 ∷ 6 ∷ [ 5 ] ++ [ 4 ] ++ [ 3 ]

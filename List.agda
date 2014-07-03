@@ -2,6 +2,9 @@ module List where
 
 open import Level
 open import Natural
+open import Boolean
+open import Equality
+open import Coproduct
 
 infixr 5 _∷_ _++_
 
@@ -34,3 +37,17 @@ reverse = foldl (λ rev x → x ∷ rev) []
 
 testlist : List ℕ
 testlist = 8 ∷ 7 ∷ 6 ∷ [ 5 ] ++ [ 4 ] ++ [ 3 ]
+
+empty? : {A : Set} → List A → Boolean
+empty? [] = true
+empty? (x ∷ a) = false
+
+data Maybe (A : Set) : Set where
+  Nothing : Maybe A
+  Just : A → Maybe A
+
+index : {A : Set} → List A → ℕ → Maybe A
+index [] n = Nothing
+index (x ∷ a) 0 = Just x
+index (x ∷ a) (S n) = index a n
+

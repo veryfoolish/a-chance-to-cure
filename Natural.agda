@@ -1,9 +1,10 @@
+{-# OPTIONS --without-K #-}
 module Natural where
 
 open import Equality
 open import Level using (Level) renaming (suc to lsuc; zero to lzero)
 
-data ℕ : Set where
+data ℕ : Set lzero where
   O : ℕ
   S : ℕ → ℕ
 

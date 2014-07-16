@@ -1,7 +1,7 @@
 module Monoid where
 
 open import Equality
-open import Cartesian
+open import Product
 open import Sigma
 
 record Monoid (A : Set) : Set where

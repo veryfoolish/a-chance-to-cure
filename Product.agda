@@ -1,4 +1,4 @@
-module Cartesian where
+module Product where
 
 open import Level using (_⊔_; Level)
 open import Sigma

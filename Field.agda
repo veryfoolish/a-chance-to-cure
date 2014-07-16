@@ -3,8 +3,9 @@ module Field where
 open import Equality
 open import Sigma
 open import Coproduct
+open import Level renaming (suc to lsuc)
 
-record Field (F : Set) : Set where
+record Field {ℓ : Level} (F : Set ℓ) : Set ℓ where
   field
     _*_ : F → F → F
     _+_ : F → F → F
@@ -33,8 +34,8 @@ module Theorems where
   1₂ *F₂ b = b
 
   assoc*F₂ : (a b c : F₂) → a *F₂ (b *F₂ c) ≡ (a *F₂ b) *F₂ c
-  assoc*F₂ 0₂ b c = refl
-  assoc*F₂ 1₂ b c = refl
+  assoc*F₂ 0₂ _ _ = refl
+  assoc*F₂ 1₂ _ _ = refl
 
   assoc+F₂ : (a b c : F₂) → a +F₂ (b +F₂ c) ≡ (a +F₂ b) +F₂ c
   assoc+F₂ 0₂ 0₂ 0₂ = refl
@@ -45,6 +46,16 @@ module Theorems where
   assoc+F₂ 1₂ 0₂ 1₂ = refl
   assoc+F₂ 1₂ 1₂ 0₂ = refl
   assoc+F₂ 1₂ 1₂ 1₂ = refl
+
+  assoc+F₂′ : (a b c : F₂) → Σ[ d ∈ F₂ ] (a *F₂ (b *F₂ c) ≡ d)
+  assoc+F₂′ a b c = (a *F₂ (b *F₂ c)) , refl
+
+  thm′ : (a : F₂) → (a ≡ 0₂) ∨ (a ≡ 1₂)
+  thm′ 0₂ = inl refl
+  thm′ 1₂ = inr refl
+
+  thm : (a : F₂) → (f : F₂ → F₂) → (f a ≡ 0₂) ∨ (f a ≡ 1₂)
+  thm a f = thm′ (f a)
 
 
   id+F₂′ : (x : F₂) → (x +F₂ 0₂ ≡ x)
@@ -103,3 +114,4 @@ module Theorems where
                   distr = distr-F₂ }
 
 open Theorems public
+

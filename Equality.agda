@@ -1,4 +1,4 @@
-open import Level using (Level)
+open import Agda.Primitive
 
 module Equality where
 

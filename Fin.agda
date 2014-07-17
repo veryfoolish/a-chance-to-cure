@@ -1,7 +1,7 @@
 {-# OPTIONS --without-K #-}
 module Fin where
 
-open import Level using (Level) renaming (zero to lzero)
+open import Agda.Primitive
 open import Natural
 
 data Fin : ℕ → Set lzero where

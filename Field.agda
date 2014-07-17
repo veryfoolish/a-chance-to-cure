@@ -3,7 +3,7 @@ module Field where
 open import Equality
 open import Sigma
 open import Coproduct
-open import Level renaming (suc to lsuc)
+open import Agda.Primitive
 
 record Field {ℓ : Level} (F : Set ℓ) : Set ℓ where
   field

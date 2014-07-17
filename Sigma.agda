@@ -2,7 +2,7 @@
 module Sigma where
 
 open import Equality
-open import Level using (_⊔_ ; Level)
+open import Agda.Primitive
 
 record Σ {a b} (A : Set a) (B : A → Set b) : Set (a ⊔ b) where
   constructor _,_

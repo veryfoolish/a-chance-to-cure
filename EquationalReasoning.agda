@@ -1,5 +1,5 @@
 {-# OPTIONS --without-K #-}
-open import Level
+open import Agda.Primitive
 open import Equality
 
 module EquationalReasoning { ℓ : Level} {A : Set ℓ} where

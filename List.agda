@@ -1,6 +1,6 @@
 module List where
 
-open import Level
+open import Agda.Primitive
 open import Natural
 open import Boolean
 open import Equality

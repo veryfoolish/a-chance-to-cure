@@ -2,15 +2,13 @@
 module Natural where
 
 open import Equality
-open import Level using (Level) renaming (suc to lsuc; zero to lzero)
+open import Agda.Primitive
 
 data ℕ : Set lzero where
   O : ℕ
   S : ℕ → ℕ
 
 {-# BUILTIN NATURAL ℕ #-}
-{-# BUILTIN SUC S #-}
-{-# BUILTIN ZERO O #-}
 
 infixl 7 _*_ _max_
 infixl 6 _+_ _min_ _∸_

@@ -15,34 +15,31 @@ data ② : Set₁ where
 ⊤==⊤ : Id ②  ⊤ ⊤
 ⊤==⊤ = ℜ ⊤
 
+module Stuff {ℓ : Level} (A : Set ℓ)  where
 
-module PathInduction 
-       {ℓ : Level} 
-       (A : Set ℓ)
+  module PathInduction 
        (C : (x y : A) → (Id A x y) → Set ℓ)
        (c : (x : A) → (C x x (ℜ x)))
        where
 
        f′ : (x y : A) → (p : Id A x y) → C x y p
        f′ x .x (ℜ .x) = c x
-open PathInduction
+  open PathInduction
 
-module J
-  {ℓ : Level}
-  (A : Set ℓ)
-  (C : (x y : A) → Id A x y → Set ℓ)
-  where
-  ind= : ((x : A) → C x x (ℜ x)) → (x y : A) → (p : Id A x y) → C x y p
-  ind= c x .x (ℜ .x) = c x
-open J
+  module J
+    (C : (x y : A) → (Id A x y) → Set ℓ)
+    where
+    ind= : ((x : A) → C x x (ℜ x)) → (x y : A) → (p : Id A x y) → C x y p
+    ind= c x .x (ℜ .x) = c x
+  open J
 
-module BasedPathInduction
-       {ℓ : Level}
-       (A : Set ℓ)
-       (C : ∀ {a} → ((x : A) → ((Id A a x) → Set ℓ)))
-       (c : ∀ {a} → (C a (ℜ a)))
-       where
-       f : ∀ {a} → (x : A) → (p : Id A a x) → (C x p)
-       f a (ℜ .a) = c
-open BasedPathInduction
+  module BasedPath
+    (C : ∀ {a} → ((x : A) → ((Id A a x) → Set ℓ)))
+    (c : ∀ {a} → (C a (ℜ a)))
+    where
+    f : ∀ {a} → (x : A) → (p : Id A a x) → (C x p)
+    f a (ℜ .a) = c
+  open BasedPath
+open Stuff
+
 

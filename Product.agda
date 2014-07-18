@@ -1,6 +1,6 @@
 module Product where
 
-open import Level using (_⊔_; Level)
+open import Agda.Primitive
 open import Sigma
 
 --- cartesian product type

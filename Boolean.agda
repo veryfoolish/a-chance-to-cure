@@ -1,7 +1,7 @@
 {-# OPTIONS --without-K #-}
 module Boolean where
 
-open import Level using (Level) renaming (zero to lzero)
+open import Agda.Primitive
 open import Equality
 open import Coproduct
 

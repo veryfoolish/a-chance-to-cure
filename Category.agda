@@ -1,13 +1,18 @@
 {-# OPTIONS --without-K #-}
 open import Agda.Primitive
 open import Equality
+open import Natural
 
 module Category where
 
-record Category {ℓ} : Set (lsuc ℓ) where
+L⟪_⟫ : ℕ → Level
+L⟪ 0 ⟫ = lzero
+L⟪ (S n) ⟫ = (lsuc L⟪ n ⟫)
+
+record Category : Set (lsuc (lsuc L⟪ 0 ⟫)) where
   field
-    Obj : Set ℓ
-    Hom : Obj → Obj → Set ℓ
+    Obj : Set L⟪ 0 ⟫
+    Hom : Obj → Obj → Set L⟪ 0 ⟫
     Id : (A : Obj) → Hom A A
     comp : ∀ {A B C} → Hom B C → Hom A B → Hom A C
     id-r : ∀ {A B : Obj} → {f : Hom A B} → comp f (Id A) ≡ f
@@ -15,36 +20,39 @@ record Category {ℓ} : Set (lsuc ℓ) where
     assoc : ∀ {A B C D} → {f : Hom C D} → {g : Hom B C} → {h : Hom A B} → comp f (comp g h) ≡ comp (comp f  g) h
 open Category public
 
-module SomeTest {ℓ} where
+≤-trans′ : {a b c : ℕ} → b ≤ c → a ≤ b → a ≤ c
+≤-trans′ p q = ≤-trans q p
 
-  data FakeCatObj : Set ℓ where
-    A B C : FakeCatObj
+inc : {a b : ℕ} → a ≤ b → S a ≤ S b
+inc = +1≤
 
-  data HomFake (a b : FakeCatObj) : Set ℓ where
-    hom : HomFake a b
+inc′ : {a b : ℕ} → a ≤ b → a ≤ S b
+inc′ p = {!!}
 
-  ∙ID : (A : FakeCatObj) → (HomFake A A)
-  ∙ID x = hom
+helper : {a b : ℕ} → (S a ≤ S b) → a ≤ b
+helper (+1≤ p) = p
 
-  ∙comp : {X Y Z : FakeCatObj} → HomFake Y Z → HomFake X Y → HomFake X Z
-  ∙comp hom hom = hom
+helper′ : (a b : ℕ) → (S a ≤ S b) → a ≤ S b
+helper′ O b (+1≤ p) = 0≤n
+helper′ (S a) O (+1≤ ())
+helper′ (S a) (S b) (+1≤ p) = +1≤ (helper′ a b p)
 
-  ∙id-r : {A B : FakeCatObj} → {f : HomFake A B} → (∙comp f (∙ID A)) ≡ f
-  ∙id-r {x} {y} {hom} = refl
 
-  ∙id-l : {A B : FakeCatObj} → {f : HomFake A B} → (∙comp (∙ID B) f) ≡ f
-  ∙id-l {x} {y} {hom} = refl
+help : (a b : ℕ) → (f : a ≤ b) → ≤-trans id≤ f ≡ f
+help O O 0≤n = refl
+help O (S b) 0≤n = refl
+help (S a) O ()
+help (S a) (S b) f = {!h!}
+                      
 
-  ∙assoc : (A B C D : FakeCatObj) → (f : HomFake C D) → (g : HomFake B C) → (h : HomFake A B) → ∙comp f (∙comp g h) ≡ ∙comp (∙comp f g) h
-  ∙assoc x y z d hom hom hom = refl
+ℕ≤ : Category
+ℕ≤ = record
+       { Obj = ℕ
+       ; Hom = _≤_
+       ; Id = λ a → id≤ {a}
+       ; comp = ≤-trans′
+       ; id-r = {!help!}
+       ; id-l = {!!}
+       ; assoc = {!!}
+       }
 
-  CC : Category {ℓ}
-  CC = record
-         { Obj = FakeCatObj
-         ; Hom = λ x y → HomFake x y
-         ; Id = ∙ID
-         ; comp = ∙comp
-         ; id-r = ∙id-r
-         ; id-l = ∙id-l
-         ; assoc = λ {w} {x} {y} {z} {f} {g} {h} → ∙assoc w x y z f g h
-         }

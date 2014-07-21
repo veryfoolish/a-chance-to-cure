@@ -11,11 +11,14 @@ data _≡_ {ℓ : Level} {A : Set ℓ} (x : A) : A → Set ℓ where
 flip : ∀ {ℓ} {A : Set ℓ} {a b : A} → (a ≡ b) → (b ≡ a)
 flip refl = refl
 
-_⌷_ : ∀ {ℓ} {A : Set ℓ} {a b c : A} → (a ≡ b) → (b ≡ c) → (a ≡ c)
-refl ⌷ refl = refl
+_□_ : ∀ {ℓ} {A : Set ℓ} {a b c : A} → (a ≡ b) → (b ≡ c) → (a ≡ c)
+refl □ refl = refl
 
 ⇕ : ∀ {ℓ} {A : Set ℓ} {a b c : A} → (a ≡ b) → (c ≡ b) → (a ≡ c)
-⇕ a p = a ⌷ flip p
+⇕ a p = a □ flip p
+
+trans : ∀ {ℓ} {A : Set ℓ} {a b c : A} → (a ≡ b) → (b ≡ c) → (a ≡ c)
+trans refl refl = refl
 
 ap : ∀ {i j} {A : Set i} {B : Set j} (f : A → B) →  {x y : A} → x ≡ y → f x ≡ f y
 ap f refl = refl

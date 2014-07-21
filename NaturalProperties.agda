@@ -13,10 +13,10 @@ open import EquationalReasoning
 +0-right-id {S n} = ap S +0-right-id
 
 +comm-zero-id₁ : {a : ℕ} → a + 0 ≡ 0 + a
-+comm-zero-id₁ = ≡-trans-flip +0-right-id +0-left-id
++comm-zero-id₁ = +0-right-id □ +0-left-id
 
 +comm-zero-id₂ : {a : ℕ} → 0 + a ≡ a + 0
-+comm-zero-id₂ = ≡-trans-flip +0-left-id +0-right-id
++comm-zero-id₂ = ⇕ +0-left-id +0-right-id
 
 m+1+n≡1+m+n : (m n : ℕ) → m + S n ≡ S (m + n)
 m+1+n≡1+m+n 0 n = refl
@@ -27,7 +27,7 @@ m+1+n≡1+m+n (S m) n = ap S (m+1+n≡1+m+n m n)
 +-comm (S m) n = 
             S m + n ≡⟨ refl ⟩
             S m + n ≡⟨ ap S (+-comm m n) ⟩
-            S n + m ≡⟨ ≡-symmetric (m+1+n≡1+m+n n m) ⟩
+            S n + m ≡⟨ flip (m+1+n≡1+m+n n m) ⟩
             n + S m
             ∎
 

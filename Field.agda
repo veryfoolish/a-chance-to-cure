@@ -47,6 +47,7 @@ module Theorems where
   assoc+F₂ 1₂ 1₂ 0₂ = refl
   assoc+F₂ 1₂ 1₂ 1₂ = refl
 
+
   assoc+F₂′ : (a b c : F₂) → Σ[ d ∈ F₂ ] (a *F₂ (b *F₂ c) ≡ d)
   assoc+F₂′ a b c = (a *F₂ (b *F₂ c)) , refl
 

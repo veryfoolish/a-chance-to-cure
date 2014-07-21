@@ -4,7 +4,7 @@ module Natural where
 open import Equality
 open import Agda.Primitive
 
-data ℕ : Set lzero where
+data ℕ : (Set lzero) where
   O : ℕ
   S : ℕ → ℕ
 
@@ -62,15 +62,29 @@ infix 4 _≤_ _<_
 standard library. But for now I'm trying to keep things concrete. -}
 
 -- less than or equal to
-data _≤_ : ℕ → ℕ → Set (lsuc lzero)  where
+data _≤_ : ℕ → ℕ → (Set lzero)  where
   0≤n : ∀ {n}                 → 0 ≤ n
   +1≤ : ∀ {m n} (m≤n : m ≤ n) → (S m) ≤ (S n)
 
 -- less than
-_<_ : ℕ → ℕ → Set (lsuc lzero)
+_<_ : ℕ → ℕ → (Set lzero)
 m < n = S m ≤ n
 
 -- greater than
 
-_>_ : ℕ → ℕ → Set (lsuc lzero)
+_>_ : ℕ → ℕ → Set lzero
 m > n = n < m
+
+≤-trans : {a b c : ℕ} → a ≤ b → b ≤ c → a ≤ c
+≤-trans 0≤n _ = 0≤n
+≤-trans (+1≤ p) (+1≤ q) = (+1≤ (≤-trans p q))
+
+id≤ : {a : ℕ} → a ≤ a
+id≤ {O} = 0≤n
+id≤ {S a} = +1≤ id≤
+
+
+
+
+
+

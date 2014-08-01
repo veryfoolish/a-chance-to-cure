@@ -1,0 +1,1 @@
+Just some personal notes on type theory and mathematics.

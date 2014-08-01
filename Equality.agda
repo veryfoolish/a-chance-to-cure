@@ -29,6 +29,7 @@ data Homotopy {i j : Level} {A : Set i} (P : A → Set j) (f g : (x : A) → P x
 id : ∀ {i} {A : Set i} →  A → A
 id x = x
 
-theorem : {i : Level} {A : Set i} → Homotopy {i = i} {j = i} {A = A} (λ x → A) id id 
-theorem = isHomotopy (λ x → refl)
+module theoremz where
+  theorem : {i : Level} {A : Set i} → Homotopy {i = i} {j = i} {A = A} (λ x → A) id id 
+  theorem = isHomotopy (λ x → refl)
 

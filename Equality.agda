@@ -7,6 +7,7 @@ infix 3 _≡_
 data _≡_ {ℓ : Level} {A : Set ℓ} (x : A) : A → Set ℓ where
   refl : x ≡ x
 
+{-# BUILTIN EQUALITY _≡_ #-}
 
 flip : ∀ {ℓ} {A : Set ℓ} {a b : A} → (a ≡ b) → (b ≡ a)
 flip refl = refl

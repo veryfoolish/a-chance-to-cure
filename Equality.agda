@@ -30,7 +30,7 @@ data Homotopy {i j : Level} {A : Set i} (P : A → Set j) (f g : (x : A) → P x
 id : ∀ {i} {A : Set i} →  A → A
 id x = x
 
-module theoremz where
-  theorem : {i : Level} {A : Set i} → Homotopy {i = i} {j = i} {A = A} (λ x → A) id id 
-  theorem = isHomotopy (λ x → refl)
-
+module induction {ℓ : Level} {A : Set ℓ} where
+  ind= : (C : (x y : A) → (x ≡ y) → Set ℓ) → ((x : A) → (C x x refl)) → (x y : A) → (p : x ≡ y) → C x y p
+  ind= C c x .x refl = c x
+open induction public

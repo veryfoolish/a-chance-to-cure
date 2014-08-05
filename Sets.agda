@@ -31,11 +31,11 @@ A ∁ P = (x : A) → (¬ (P x))
 is∙Contr : {ℓ : Level} → Set ℓ → Set ℓ
 is∙Contr A = Σ[ x ∈ A ] ((y : A) → x ≡ y)
 
-is∙Prop : {ℓ : Level} → Set ℓ → Set ℓ
-is∙Prop A = (p q : A) → (p ≡ q)
+data is∙Prop {ℓ} (A : Set ℓ) {p q : A} : Set ℓ where
+  isprop : (p ≡ q) → is∙Prop A
 
 is∙Set : {ℓ : Level} → Set ℓ → Set ℓ
-is∙Set A = (x y : A) → is∙Prop (x ≡ y)
+is∙Set A = (x y : A) → is∙Prop A
 
 data NLevel {ℓ : Level} : Set ℓ where
   ⟨_⟩ : ℕ → NLevel
@@ -45,5 +45,8 @@ is∙_∙type   ⟨ 0 ⟩ X = is∙Contr X
 is∙_∙type ⟨ S n ⟩ X = (x y : X) → is∙ ⟨ n ⟩ ∙type (x ≡ y)
 
 
-⟪_⟫-type : {ℓ : Level} → NLevel {ℓ} → Set (suc ℓ)  
-⟪_⟫-type {ℓ} n  = Σ[ U ∈ Set ℓ ] (is∙ n ∙type U)
+n-type : {ℓ : Level} → (NLevel) {ℓ} → Set (suc ℓ)  
+n-type {ℓ} n  = Σ[ U ∈ Set ℓ ] (is∙ n ∙type U)
+
+thm : ∀ {ℓ} {A : Set ℓ} → (q p : is∙Prop A) → q ≡ p
+thm (isprop x) (isprop x₁) = {!!}

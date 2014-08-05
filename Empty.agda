@@ -1,11 +1,10 @@
+open import Level renaming (zero to ∘)
 module Empty where
 
-open import Level
+data ⊥ : Set ∘ where
 
-data ⊥ : Set zero where
-
-⊥-elim : {ℓ : Level} {A : Empty → Set ℓ} → ((x : Empty) → A x)
+⊥-elim : ∀ {i} {P : ⊥ → Set i} → ((x : ⊥) → P x)
 ⊥-elim ()
 
-⊥-rec : {ℓ : Level} {A : Type ℓ} → (⊥ → A)
-⊥-rec = ⊥-elim
+¬ : ∀ {i} (A : Set i) → Set i
+¬ A = A → ⊥

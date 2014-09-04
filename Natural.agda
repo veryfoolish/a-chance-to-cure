@@ -85,6 +85,20 @@ id≤ {S a} = +1≤ id≤
 
 
 
+open import Equality
+
+a = 4
+b = S (S (S (S O)))
+
+p : 4 ≡ 4
+p = refl {lzero} {ℕ} {2 + 2}
+
+z : 4 ≡ 2 + 2
+z = refl {lzero} {ℕ} {b}
+
+thm2p2e2p2 : 2 + 2 ≡ 4
+thm2p2e2p2 = refl
+
 
 
 

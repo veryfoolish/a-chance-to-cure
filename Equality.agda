@@ -9,6 +9,7 @@ data _≡_ {ℓ : Level} {A : Set ℓ} (x : A) : A → Set ℓ where
   refl : x ≡ x
 
 {-# BUILTIN EQUALITY _≡_ #-}
+{-# BUILTIN REFL refl #-}
 
 module ops {ℓ} {A : Set ℓ} where
   infix 4 _▮_ _⁻
@@ -36,3 +37,9 @@ module induction {ℓ : Level} {A : Set ℓ} where
   ind= C c x .x refl = c x
 
 open induction public
+
+module based-path-induction {ℓ : Level} {A : Set ℓ} (a : A) where
+
+  module based (C : (x : A) → (a ≡ x) → Set ℓ) (c : C a refl) where
+    f : (x : A) → (p : a ≡ x) → C x p
+    f .a refl = c

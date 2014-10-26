@@ -1,7 +1,7 @@
 {-# OPTIONS --without-K #-}
 module Sigma where
 
-open import Equality
+open import Identity
 open import Agda.Primitive
 
 record Σ {a b} (A : Set a) (B : A → Set b) : Set (a ⊔ b) where

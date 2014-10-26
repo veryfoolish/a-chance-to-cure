@@ -1,7 +1,7 @@
 open import Natural
 open import Boolean
 open import Empty
-open import Equality
+open import Identity
 open import Product
 open import Coproduct
 open import Sigma

@@ -1,6 +1,6 @@
 module Group where
 
-open import Equality
+open import Identity
 open import Agda.Primitive renaming (lsuc to ↑)
 
 record Group {ℓ} (G : Set ℓ) : Set ℓ where

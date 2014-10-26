@@ -1,7 +1,7 @@
 module NaturalProperties where
 
 open import Natural
-open import Equality
+open import Identity
 open import EquationalReasoning
 open import Unit
 open import Level

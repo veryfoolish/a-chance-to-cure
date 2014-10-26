@@ -1,6 +1,6 @@
 open import List renaming (length to ∣_∣; _++_ to _⋈_)
 open import Natural
-open import Equality
+open import Identity
 open import Level
 
 module ListProperties {ℓ : Level} {A : Set ℓ} where

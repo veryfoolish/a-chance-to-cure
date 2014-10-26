@@ -1,6 +1,6 @@
 open import Agda.Primitive
 
-module Equality where
+module Identity where
 
 infix 3 _≡_
 

@@ -1,7 +1,7 @@
 {-- some thoughts on functional extensionality --}
 
 open import Agda.Primitive using (Level)
-open import Equality
+open import Identity
 
 module funext where
 

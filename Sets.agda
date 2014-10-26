@@ -4,7 +4,7 @@ open import Sigma
 open import Product renaming (_×_ to _⋀_)
 open import Coproduct
 open import Empty
-open import Equality
+open import Identity
 module Sets where
 
 {-- this is kinda cool --}

@@ -1,7 +1,7 @@
 {-# OPTIONS --without-K #-}
 
 open import Natural
-open import Equality
+open import Identity
 open import Boolean
 
 module Integer where

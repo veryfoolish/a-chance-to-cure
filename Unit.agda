@@ -1,7 +1,7 @@
 module Unit where
 
 open import Level using (Level) renaming (zero to l₀)
-open import Equality
+open import Identity
 open import Contractible
 open import Sigma
 

@@ -1,6 +1,6 @@
 module Field where
 
-open import Equality
+open import Identity
 open import Sigma
 open import Coproduct
 open import Agda.Primitive

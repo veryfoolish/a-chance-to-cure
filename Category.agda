@@ -1,6 +1,6 @@
 {-# OPTIONS --without-K #-}
 open import Agda.Primitive
-open import Equality
+open import Identity
 open import Natural
 
 module Category where

@@ -1,6 +1,6 @@
 {-# OPTIONS --without-K #-}
 open import Agda.Primitive
-open import Equality
+open import Identity
 
 module EquationalReasoning { ℓ : Level} {A : Set ℓ} where
 

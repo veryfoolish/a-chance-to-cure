@@ -1,7 +1,7 @@
 {-# OPTIONS --without-K #-}
 module Natural where
 
-open import Equality
+open import Identity
 open import Agda.Primitive
 
 data ℕ : (Set lzero) where
@@ -85,7 +85,7 @@ id≤ {S a} = +1≤ id≤
 
 
 
-open import Equality
+open import Identity
 
 a = 4
 b = S (S (S (S O)))

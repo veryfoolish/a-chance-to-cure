@@ -3,7 +3,7 @@ module List where
 open import Agda.Primitive
 open import Natural
 open import Boolean
-open import Equality
+open import Identity
 open import Coproduct
 
 infixr 5 _∷_ _++_

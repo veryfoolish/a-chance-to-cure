@@ -1,4 +1,4 @@
-open import Equality
+open import Identity
 open import Level
 open import Sigma 
 

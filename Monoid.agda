@@ -1,6 +1,6 @@
 module Monoid where
 
-open import Equality
+open import Identity
 open import Product
 open import Sigma
 

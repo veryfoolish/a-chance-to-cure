@@ -2,7 +2,7 @@
 module Boolean where
 
 open import Agda.Primitive
-open import Equality
+open import Identity
 open import Coproduct
 
 data Boolean : Set lzero where

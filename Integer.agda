@@ -24,7 +24,7 @@ pred (pos (S n)) = pos n
 pred (neg n) = neg (S n)
 
 abstract
-  succ-pred : (n : ℤ) → succ (pred n) ≡ n
+  succ-pred : (n : ℤ) → succ (pred n) ≗ n
   succ-pred O = refl
   succ-pred (pos O) = refl
   succ-pred (pos (S n)) = refl
@@ -50,6 +50,6 @@ neg (S n) ℤ+ b = pred (neg n ℤ+ b)
 ℤ<0? : ℤ → Boolean
 ℤ<0? a = Not (ℤ≥0? a)
 
-ℤ+-unit-l : ∀ z → O ℤ+ z ≡ z
+ℤ+-unit-l : ∀ z → O ℤ+ z ≗ z
 ℤ+-unit-l _ = refl
 

@@ -1,10 +1,14 @@
-open import Level renaming (zero to ∘)
+open import Agda.Primitive
 module Empty where
 
-data ⊥ : Set ∘ where
+data ⊥ : Set where
 
 ⊥-elim : ∀ {i} {P : ⊥ → Set i} → ((x : ⊥) → P x)
 ⊥-elim ()
 
-¬ : ∀ {i} (A : Set i) → Set i
+¬ : {ℓ : Level} → (A : Set ℓ) → Set ℓ
 ¬ A = A → ⊥
+
+module Theorems {ℓ : Level} (A : Set ℓ) where
+  theorem-α : ¬ (¬ (¬ A)) → ¬ A
+  theorem-α ¬¬¬A a = ¬¬¬A (λ z → z a)

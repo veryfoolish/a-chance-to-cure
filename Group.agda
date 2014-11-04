@@ -1,6 +1,6 @@
 module Group where
 
-open import Identity
+open import Identity renaming (_≗_ to _≡_)
 open import Agda.Primitive renaming (lsuc to ↑)
 
 record Group {ℓ} (G : Set ℓ) : Set ℓ where
@@ -14,8 +14,4 @@ record Group {ℓ} (G : Set ℓ) : Set ℓ where
     inv-lunit : ∀ {a} → mul (inv a) a ≡ unit
     inv-lrunit : ∀ {a} → mul a (inv a) ≡ unit
 
-module Homomorphism {ℓ m} (A : Set ℓ) (B : Set m) where
-       open Group A renaming (mul to _●_; unit to g)
-       open Group B renaming (mul to _*_; unit to h)
-       data Map : Set (ℓ ⊔ m) where
-         map : (f : A → B) → (f g ≡ h) → ((a b : A) → (f (a ● b)) ≡ ((f a) * (f b))) → Map
+

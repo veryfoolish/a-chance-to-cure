@@ -1,6 +1,6 @@
 module Field where
 
-open import Identity
+open import Identity renaming (_≗_ to _≡_)
 open import Sigma
 open import Coproduct
 open import Agda.Primitive

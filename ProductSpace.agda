@@ -1,6 +1,6 @@
 open import Product
 open import Natural
-open import Level
+open import Agda.Primitive
 module ProductSpace where
 
 Π : {ℓ : Level} → (A : Set ℓ) → Set ℓ

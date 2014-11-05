@@ -1,10 +1,11 @@
 open import Natural
 open import Boolean
 open import Empty
-open import Identity
+open import Identity renaming (_≗_ to _≡_)
 open import Product
 open import Coproduct
 open import Sigma
+open import Agda.Primitive using (Level)
 
 module Evaluation where
 
@@ -34,7 +35,7 @@ conj a b = neg (cond a (neg b))
 id∙ : (a b : Domain) → Domain
 id∙ a b = conj (cond a b) (cond b a)
 
-open import Level
+
 theorem : (a : ℕ) → (id∙ (inr a) (inr a)) ≡ inl true
 theorem O = refl
 theorem (S a) = theorem a

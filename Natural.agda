@@ -95,6 +95,12 @@ z = refl {lzero} {ℕ} {b}
 thm2p2e2p2 : 2 + 2 ≗ 4
 thm2p2e2p2 = refl
 
+hyper : ℕ → ℕ → ℕ → ℕ
+hyper O a b = (S b)
+hyper 1 a O = a
+hyper 2 a O = O
+hyper (S (S (S n))) a O = 1
+hyper (S n) a (S b) = hyper n a (hyper (S n) a b)
 
 
-
+testit = hyper 4 2 5
